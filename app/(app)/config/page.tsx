@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Connection, PublicKey, clusterApiUrl } from "@solana/web3.js";
-import * as multisig from "@sqds/multisig";
+import * as multisig from "@/squads/src";
 import { headers } from "next/headers";
 const ConfigurationPage = async () => {
   const rpcUrl = headers().get("x-rpc-url");

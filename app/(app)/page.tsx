@@ -1,7 +1,7 @@
 import { Connection, PublicKey, clusterApiUrl } from "@solana/web3.js";
 import { headers } from "next/headers";
 import Image from "next/image";
-import * as multisig from "@sqds/multisig";
+import * as multisig from "@/squads/src";
 import { TokenList } from "@/components/TokenList";
 import { VaultDisplayer } from "@/components/VaultDisplayer";
 

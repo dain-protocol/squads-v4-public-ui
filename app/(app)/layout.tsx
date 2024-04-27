@@ -2,7 +2,7 @@ import { headers } from "next/headers";
 import Link from "next/link";
 import Image from "next/image";
 import { Connection, PublicKey, clusterApiUrl } from "@solana/web3.js";
-import * as multisig from "@sqds/multisig";
+import * as multisig from "@/squads/src";
 import { Toaster } from "@/components/ui/sonner";
 import ConnectWallet from "@/components/ConnectWalletButton";
 import { LucideHome, ArrowDownUp, Users, Settings } from "lucide-react";

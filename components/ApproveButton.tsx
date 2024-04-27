@@ -6,7 +6,7 @@ import {
   clusterApiUrl,
 } from "@solana/web3.js";
 import { Button } from "./ui/button";
-import * as multisig from "@sqds/multisig";
+import * as multisig from "@/squads/src";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { toast } from "sonner";

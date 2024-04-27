@@ -1,4 +1,4 @@
-import * as multisig from "@sqds/multisig";
+import * as multisig from "@/squads/src";
 import { headers } from "next/headers";
 import { Connection, PublicKey, clusterApiUrl } from "@solana/web3.js";
 import {

@@ -1,4 +1,4 @@
-import * as multisig from "@sqds/multisig";
+import * as multisig from "@/squads/src";
 import {
   Card,
   CardContent,

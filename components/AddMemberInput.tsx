@@ -5,7 +5,7 @@ import { Input } from "./ui/input";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useState } from "react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
-import * as multisig from "@sqds/multisig";
+import * as multisig from "@/squads/src";
 import { Connection, PublicKey } from "@solana/web3.js";
 import { toast } from "sonner";
 

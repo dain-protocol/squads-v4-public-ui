@@ -14,7 +14,7 @@ import {
   createTransferCheckedInstruction,
   getAssociatedTokenAddressSync,
 } from "@solana/spl-token";
-import * as multisig from "@sqds/multisig";
+import * as multisig from "@/squads/src";
 import { useWallet } from "@solana/wallet-adapter-react";
 import {
   Connection,
