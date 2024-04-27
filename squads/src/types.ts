@@ -10,16 +10,17 @@ export {
   isProposalStatusRejected,
   isProposalStatusCancelled,
   isProposalStatusExecuted,
-  Member,
-  ConfigAction,
   isConfigActionAddMember,
   isConfigActionRemoveMember,
   isConfigActionChangeThreshold,
   isConfigActionAddSpendingLimit,
   isConfigActionRemoveSpendingLimit,
   isConfigActionSetTimeLock,
-  ConfigActionRecord,
   Period,
+} from "./generated";
+
+export type {
+  Member, ConfigAction, ConfigActionRecord, 
 } from "./generated";
 
 export const Permission = {
