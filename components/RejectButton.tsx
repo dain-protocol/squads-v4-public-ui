@@ -30,7 +30,7 @@ const RejectButton = ({
   const router = useRouter();
 
   const connection = new Connection(rpcUrl || (process.env.NEXT_PUBLIC_RPC as string), {
-    commitment: "confirmed",
+    commitment: "processed",
   });
 
   const validKinds = ["None", "Active", "Draft"];
@@ -81,7 +81,7 @@ const RejectButton = ({
     });
     console.log("Transaction signature", signature);
     toast.success("Transaction submitted.");
-    await connection.confirmTransaction(signature, "confirmed");
+    await connection.confirmTransaction(signature, "processed");
     toast.success("Transaction executed.");
     await new Promise((resolve) => setTimeout(resolve, 1000));
     router.refresh();

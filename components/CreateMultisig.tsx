@@ -75,7 +75,7 @@ function Create({ rpcUrl }: { rpcUrl: string }) {
       const connection = new Connection(
         rpcUrl || (process.env.NEXT_PUBLIC_RPC as string),
         {
-          commitment: "confirmed",
+          commitment: "processed",
         }
       );
 

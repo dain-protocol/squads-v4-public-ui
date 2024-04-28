@@ -26,7 +26,7 @@ const RemoveMemberButton = ({
 
   const member = new PublicKey(memberKey);
 
-  const connection = new Connection(rpcUrl, { commitment: "confirmed" });
+  const connection = new Connection(rpcUrl, { commitment: "processed" });
 
   const removeMember = async () => {
     if (!wallet.publicKey) {
@@ -60,8 +60,9 @@ const RemoveMemberButton = ({
     );
     console.log("Transaction signature", signature);
     toast.success("Transaction submitted.");
-    await connection.confirmTransaction(signature, "confirmed");
+    await connection.confirmTransaction(signature, "processed");
     toast.success("Transaction executed.");
+    await fetch(`/api/updateMultisigMembers?multisigpda=${multisigPda}`);
     await new Promise((resolve) => setTimeout(resolve, 1000));
     router.refresh();
   };

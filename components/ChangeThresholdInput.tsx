@@ -26,7 +26,7 @@ const ChangeThresholdInput = ({
   const router = useRouter();
 
   const bigIntTransactionIndex = BigInt(transactionIndex);
-  const connection = new Connection(rpcUrl, { commitment: "confirmed" });
+  const connection = new Connection(rpcUrl, { commitment: "processed" });
 
   const changeThreshold = async () => {
     if (!wallet.publicKey) {
@@ -59,7 +59,7 @@ const ChangeThresholdInput = ({
     );
     console.log("Transaction signature", signature);
     toast.info("Transaction submitted.");
-    await connection.confirmTransaction(signature, "confirmed");
+    await connection.confirmTransaction(signature, "processed");
     toast.success("Transaction created.");
     await new Promise((resolve) => setTimeout(resolve, 1000));
     router.refresh();

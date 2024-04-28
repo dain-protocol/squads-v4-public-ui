@@ -40,7 +40,7 @@ const ExecuteButton = ({
 
   const isTransactionReady = proposalStatus === "Approved";
   const connection = new Connection(rpcUrl || (process.env.NEXT_PUBLIC_RPC as string), {
-    commitment: "confirmed",
+    commitment: "processed",
   });
 
   const executeTransaction = async () => {
@@ -91,7 +91,7 @@ const ExecuteButton = ({
     );
     console.log("Transaction signature", signature);
     toast.success("Transaction submitted.");
-    await connection.confirmTransaction(signature, "confirmed");
+    await connection.confirmTransaction(signature, "processed");
     toast.success("Transaction executed.");
     await new Promise((resolve) => setTimeout(resolve, 1000));
     router.refresh();

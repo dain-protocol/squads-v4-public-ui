@@ -20,7 +20,7 @@ export const POST = async (req: NextRequest) => {
   // confirm the signature
 
   const connection = new Connection(process.env.NEXT_PUBLIC_RPC as string, {
-    commitment: "confirmed",
+    commitment: "processed",
   });
 
   const signature = body.signature;

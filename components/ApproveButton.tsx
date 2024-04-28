@@ -37,7 +37,7 @@ const ApproveButton = ({
   ];
   const isKindValid = validKinds.includes(proposalStatus || "None");
   const connection = new Connection(rpcUrl || (process.env.NEXT_PUBLIC_RPC as string), {
-    commitment: "confirmed",
+    commitment: "processed",
   });
 
   const approveProposal = async () => {
@@ -77,7 +77,7 @@ const ApproveButton = ({
     });
     console.log("Transaction signature", signature);
     toast.success("Approval submitted");
-    await connection.confirmTransaction(signature, "confirmed");
+    await connection.confirmTransaction(signature, "processed");
     toast.success("Proposal approved");
     await new Promise((resolve) => setTimeout(resolve, 1000));
     router.refresh();

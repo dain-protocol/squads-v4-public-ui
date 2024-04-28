@@ -87,7 +87,7 @@ const SendTokens = ({
     );
 
     const connection = new Connection(rpcUrl || (process.env.NEXT_PUBLIC_RPC as string), {
-      commitment: "confirmed",
+      commitment: "processed",
     });
 
     const multisigInfo = await multisig.accounts.Multisig.fromAccountAddress(
@@ -127,7 +127,7 @@ const SendTokens = ({
     );
     console.log("Transaction signature", signature);
     toast.info("Transaction submitted.");
-    await connection.confirmTransaction(signature, "confirmed");
+    await connection.confirmTransaction(signature, "processed");
     toast.success("Proposal creation successful.");
     await new Promise((resolve) => setTimeout(resolve, 1000));
     router.refresh();
