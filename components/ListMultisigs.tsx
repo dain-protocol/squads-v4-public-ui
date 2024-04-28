@@ -73,7 +73,6 @@ function Multisigs({ address }: { address: string }) {
   return (
     <div className="w-full max-w-[1000px]">
       <Table>
-        <TableCaption>A list of your multisigs.</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>Address</TableHead>
