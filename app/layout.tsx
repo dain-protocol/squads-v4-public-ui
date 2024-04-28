@@ -6,9 +6,9 @@ import { Wallet } from "@/components/Wallet";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Squads Simplified",
+  title: "Squads DAIN Version",
   description:
-    "Squads v4 program user interface.",
+    "Squads v4 program user interface for dain",
 };
 
 export default function RootLayout({

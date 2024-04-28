@@ -36,7 +36,7 @@ const ApproveButton = ({
     "Cancelled",
   ];
   const isKindValid = validKinds.includes(proposalStatus || "None");
-  const connection = new Connection(rpcUrl || clusterApiUrl("mainnet-beta"), {
+  const connection = new Connection(rpcUrl || (process.env.NEXT_PUBLIC_RPC as string), {
     commitment: "confirmed",
   });
 

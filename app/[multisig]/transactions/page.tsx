@@ -28,14 +28,13 @@ export default async function TransactionsPage({
   params,
   searchParams,
 }: {
-  params: {};
+  params: {multisig: string};
   searchParams: { page: string };
 }) {
   const page = searchParams.page ? parseInt(searchParams.page) : 1;
   const rpcUrl = headers().get("x-rpc-url");
-  const connection = new Connection(rpcUrl || clusterApiUrl("mainnet-beta"));
-  const multisigCookie = headers().get("x-multisig");
-  const multisigPda = new PublicKey(multisigCookie!);
+  const connection = new Connection(rpcUrl || (process.env.NEXT_PUBLIC_RPC as string));
+  const multisigPda = new PublicKey(params.multisig!);
   const vaultIndex = Number(headers().get("x-vault-index"));
 
   const multisigInfo = await multisig.accounts.Multisig.fromAccountAddress(
@@ -108,7 +107,7 @@ export default async function TransactionsPage({
                   <Link
                     href={createSolanaExplorerUrl(
                       transaction.transactionPda[0].toBase58(),
-                      rpcUrl || clusterApiUrl("mainnet-beta")
+                      rpcUrl || (process.env.NEXT_PUBLIC_RPC as string)
                     )}
                   >
                     {transaction.transactionPda[0].toBase58()}
@@ -120,7 +119,7 @@ export default async function TransactionsPage({
                 <TableCell>
                   <ApproveButton
                     rpcUrl={rpcUrl!}
-                    multisigPda={multisigCookie!}
+                    multisigPda={params.multisig!}
                     transactionIndex={transactionIndex}
                     proposalStatus={
                       transaction.proposal?.status.__kind || "None"
@@ -128,7 +127,7 @@ export default async function TransactionsPage({
                   />
                   <RejectButton
                     rpcUrl={rpcUrl!}
-                    multisigPda={multisigCookie!}
+                    multisigPda={params.multisig!}
                     transactionIndex={transactionIndex}
                     proposalStatus={
                       transaction.proposal?.status.__kind || "None"
@@ -136,7 +135,7 @@ export default async function TransactionsPage({
                   />
                   <ExecuteButton
                     rpcUrl={rpcUrl!}
-                    multisigPda={multisigCookie!}
+                    multisigPda={params.multisig!}
                     transactionIndex={transactionIndex}
                     proposalStatus={
                       transaction.proposal?.status.__kind || "None"

@@ -6,9 +6,14 @@ import * as multisig from "@/squads/src";
 import { Toaster } from "@/components/ui/sonner";
 import ConnectWallet from "@/components/ConnectWalletButton";
 import { LucideHome, ArrowDownUp, Users, Settings } from "lucide-react";
-import RenderMultisigRoute from "@/components/RenderMultisigRoute";
 
-const AppLayout = async ({ children }: { children: React.ReactNode }) => {
+const AppLayout = async ({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: { multisig: string };
+}) => {
   const tabs = [
     {
       name: "Home",
@@ -35,8 +40,6 @@ const AppLayout = async ({ children }: { children: React.ReactNode }) => {
   const headersList = headers();
 
   const path = headersList.get("x-pathname");
-  const multisigCookie = headersList.get("x-multisig");
-  const multisig = await isValidPublicKey(multisigCookie!);
 
   return (
     <body>
@@ -63,14 +66,14 @@ const AppLayout = async ({ children }: { children: React.ReactNode }) => {
               </Link>
               <ul className="space-y-2 text-sm font-medium">
                 {tabs.map((tab) => (
-                  <li key={tab.route}>
+                  <li key={params.multisig + "/" +tab.route}>
                     <a
-                      href={tab.route}
+                      href={"/" + params.multisig + "/" +tab.route}
                       className={`flex items-center rounded-lg px-4 py-3 text-slate-900 
                     
         ${
-          (path!.startsWith(`${tab.route}/`) && tab.route != "/") ||
-          tab.route === path
+          (path!.startsWith(`${params.multisig + "/" + tab.route}/`) && tab.route != "/") ||
+          (params.multisig + "/" +tab.route) === path
             ? "bg-slate-400"
             : "hover:bg-slate-400"
         }`}
@@ -111,7 +114,9 @@ const AppLayout = async ({ children }: { children: React.ReactNode }) => {
           </div>
         </aside>
 
-        <RenderMultisigRoute multisig={multisig} children={children} />
+        <div className="md:w-9/12 md:ml-auto space-y-2 p-3 pt-4 mt-1 md:space-y-4 md:p-8 md:pt-6 pb-24">
+          <div>{children} </div>
+        </div>
       </div>
       <Toaster />
     </body>

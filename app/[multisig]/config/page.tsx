@@ -12,12 +12,17 @@ import {
 import { Connection, PublicKey, clusterApiUrl } from "@solana/web3.js";
 import * as multisig from "@/squads/src";
 import { headers } from "next/headers";
-const ConfigurationPage = async () => {
+const ConfigurationPage = async ({
+  params,
+  searchParams,
+}: {
+  params: { multisig: string };
+  searchParams?: { prefill: string };
+}) => {
   const rpcUrl = headers().get("x-rpc-url");
 
-  const connection = new Connection(rpcUrl || clusterApiUrl("mainnet-beta"));
-  const multisigCookie = headers().get("x-multisig");
-  const multisigPda = new PublicKey(multisigCookie!);
+  const connection = new Connection(rpcUrl || (process.env.NEXT_PUBLIC_RPC as string));
+  const multisigPda = new PublicKey(params.multisig!);
   const vaultIndex = Number(headers().get("x-vault-index"));
 
   const multisigInfo = await multisig.accounts.Multisig.fromAccountAddress(
@@ -50,9 +55,9 @@ const ConfigurationPage = async () => {
                   </div>
                   <div className="ml-auto">
                     <RemoveMemberButton
-                      rpcUrl={rpcUrl || clusterApiUrl("mainnet-beta")}
+                      rpcUrl={rpcUrl || (process.env.NEXT_PUBLIC_RPC as string)}
                       memberKey={member.key.toBase58()}
-                      multisigPda={multisigCookie!}
+                      multisigPda={params.multisig!}
                       transactionIndex={
                         Number(multisigInfo.transactionIndex) + 1
                       }
@@ -73,8 +78,8 @@ const ConfigurationPage = async () => {
           </CardHeader>
           <CardContent>
             <AddMemberInput
-              multisigPda={multisigCookie!}
-              rpcUrl={rpcUrl || clusterApiUrl("mainnet-beta")}
+              multisigPda={params.multisig!}
+              rpcUrl={rpcUrl || (process.env.NEXT_PUBLIC_RPC as string)}
               transactionIndex={Number(multisigInfo.transactionIndex) + 1}
             />
           </CardContent>
@@ -88,8 +93,8 @@ const ConfigurationPage = async () => {
           </CardHeader>
           <CardContent>
             <ChangeThresholdInput
-              multisigPda={multisigCookie!}
-              rpcUrl={rpcUrl || clusterApiUrl("mainnet-beta")}
+              multisigPda={params.multisig!}
+              rpcUrl={rpcUrl || (process.env.NEXT_PUBLIC_RPC as string)}
               transactionIndex={Number(multisigInfo.transactionIndex) + 1}
             />
           </CardContent>
@@ -105,8 +110,8 @@ const ConfigurationPage = async () => {
           </CardHeader>
           <CardContent>
             <ChangeUpgradeAuthorityInput
-              multisigPda={multisigCookie!}
-              rpcUrl={rpcUrl || clusterApiUrl("mainnet-beta")}
+              multisigPda={params.multisig!}
+              rpcUrl={rpcUrl || (process.env.NEXT_PUBLIC_RPC as string)}
               transactionIndex={Number(multisigInfo.transactionIndex) + 1}
               vaultIndex={vaultIndex}
             />

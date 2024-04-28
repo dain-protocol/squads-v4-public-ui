@@ -39,7 +39,7 @@ const ExecuteButton = ({
   const [computeUnitBudget, setComputeUnitBudget] = useState<number>(200_000);
 
   const isTransactionReady = proposalStatus === "Approved";
-  const connection = new Connection(rpcUrl || clusterApiUrl("mainnet-beta"), {
+  const connection = new Connection(rpcUrl || (process.env.NEXT_PUBLIC_RPC as string), {
     commitment: "confirmed",
   });
 
