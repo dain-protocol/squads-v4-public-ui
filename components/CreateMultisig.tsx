@@ -120,7 +120,6 @@ function Create({ rpcUrl }: { rpcUrl: string }) {
 
       toast.loading("Multisig pending confirmation");
 
-      await connection.confirmTransaction(signature, "confirmed");
 
       await fetch("/api/createMultisig", {
         method: "POST",
@@ -128,6 +127,7 @@ function Create({ rpcUrl }: { rpcUrl: string }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          signature,
           name,
           multisigPda: multisigPDA.toBase58(),
           creator: creator.toBase58(),

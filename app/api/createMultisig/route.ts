@@ -1,3 +1,4 @@
+import { Connection } from "@solana/web3.js";
 import { kv } from "@vercel/kv";
 import { NextRequest, NextResponse } from "next/server";
 import z, { ZodSchema } from "zod";
@@ -6,6 +7,7 @@ const schema = z.object({
   multisigPda: z.string(),
   name: z.string(),
   creator: z.string(),
+  signature: z.string(),
 });
 
 export const POST = async (req: NextRequest) => {
@@ -14,6 +16,25 @@ export const POST = async (req: NextRequest) => {
   if (!body) {
     return NextResponse.json({ error: error }, { status: 400 });
   }
+
+
+  // confirm the signature
+
+  const connection = new Connection(process.env.NEXT_PUBLIC_RPC as string, {
+    commitment: "confirmed",
+  });
+
+    const signature = body.signature;
+
+    const transaction = await connection.getTransaction(signature);
+  console.log("Transaction", transaction);
+    if (!transaction) {
+      return NextResponse.json({
+        error: "Transaction not found",
+      });
+    }
+
+
 
   // get the multsig from the KV store
 
@@ -24,7 +45,6 @@ export const POST = async (req: NextRequest) => {
       error: "Multisig already exists",
     });
   }
-
 
   // store the multisig in the KV store
 
