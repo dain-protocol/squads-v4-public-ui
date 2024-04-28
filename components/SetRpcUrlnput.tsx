@@ -35,7 +35,7 @@ const SetRpcUrlInput = () => {
     <div>
       <Input
         onChange={(e) => setRpcUrl(e.target.value)}
-        placeholder="http://107.155.101.134:8899"
+        placeholder="https://rpc.dain.bot/"
         defaultValue={rpcUrl}
         className=""
       />
