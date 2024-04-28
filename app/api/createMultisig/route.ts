@@ -17,24 +17,21 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json({ error: error }, { status: 400 });
   }
 
-
   // confirm the signature
 
   const connection = new Connection(process.env.NEXT_PUBLIC_RPC as string, {
     commitment: "confirmed",
   });
 
-    const signature = body.signature;
+  const signature = body.signature;
 
-    const transaction = await connection.getTransaction(signature);
+  const transaction = await connection.confirmTransaction(signature);
   console.log("Transaction", transaction);
-    if (!transaction) {
-      return NextResponse.json({
-        error: "Transaction not found",
-      });
-    }
-
-
+  if (!transaction) {
+    return NextResponse.json({
+      error: "Transaction not found",
+    });
+  }
 
   // get the multsig from the KV store
 
