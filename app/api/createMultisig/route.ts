@@ -9,6 +9,7 @@ const schema = z.object({
   creator: z.string(),
   signature: z.string(),
 });
+export const maxDuration = 300;
 
 export const POST = async (req: NextRequest) => {
   const { body, error } = await parseBody(req, schema);
